@@ -1,0 +1,41 @@
+<main>
+    <header>
+        <h3 class="text-center">Productos: </h3>
+    </header>
+    <div class="text-center">
+        {{#each filteredProduct}}
+        <p>{{this.thumbnail}}</p>
+        <p><strong>Titulo: </strong>{{this.title}}</p>
+        <p><strong>Descripcion: </strong>{{this.description}}</p>
+        <p><strong>Precio: </strong>${{this.price}}</p>
+        <p><strong>Stock: </strong>{{this.stock}}</p>
+        {{/each}}
+        <a id="addToCartBtn" class="btn btn-secondary"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const btn = document.getElementById('addToCartBtn').addEventListener('click', function() {
+        addToCart('{{filteredProduct.[0]._id}}')
+    })
+
+    function addToCart(productId) {
+        fetch(`/api/carts/${productId}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Product added to cart successfully!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else {
+                    console.error('Error adding product to cart:', data.message)
+                }
+            })
+            .catch(error => {
+                console.error('Error adding product to cart:', error)
+            })
+    }
+</script>

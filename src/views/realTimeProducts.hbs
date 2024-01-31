@@ -1,0 +1,39 @@
+<div>
+    <h2>Aqui puedes agregar o eliminar productos</h2>
+</div>
+<h3>Lista de productos: </h3>
+<div>
+    <form>
+        <input type="text" id="title" placeholder="titulo del producto" />
+        <input type="text" id="description" placeholder="descripcion del producto" />
+        <input type="number" id="price" placeholder="precio del producto" />
+        <input type="text" id="thumbnail" placeholder="img del producto" />
+        <input type="text" id="code" placeholder="codigo del producto" />
+        <input type="number" id="stock" placeholder="stock" />
+        <input type="checkbox" id="status" placeholder="estado" />
+        <input type="text" id="category" placeholder="categoria" />
+        <input type="button" value="Agregar producto" onclick="addProduct()" />
+    </form>
+</div>
+<div class="item-products" id="products">
+    <ul>
+        {{#each docs}}
+            <li>Titulo: {{this.title}}</li>
+            <li>Precio: ${{this.price}}</li>
+            <li>Stock: {{this.stock}}</li>
+            <button onclick="removeProduct('{{this._id}}')">Eliminar</button>
+            <hr>
+        {{/each}}
+    </ul>
+</div>
+<div class="text-center" style="margin-top: 20px">
+        {{#if hasPrevPage}}
+            <a href="/?pageNumber={{prevPage}}" class="btn btn-dark" style="margin-right: 10px">Anterior</a>
+        {{/if}}
+        <span class="page-number" style="margin-right: 10px">{{page}}</span>
+        {{#if hasNextPage}}
+            <a href="/?pageNumber={{nextPage}}" class="btn btn-dark">Siguiente</a>
+        {{/if}}
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>

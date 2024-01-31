@@ -1,0 +1,15 @@
+<section class="section_account">
+    <h1>Login</h1>
+
+    <form action="/api/session/login" method="POST" class="form-group">
+        <input type="email" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Contraseña">
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+    <br>
+    <a href="/api/session/github" class="btn btn-dark"><i class="fa-brands fa-github"></i></a>
+    <br>
+        <a><strong>Si no tienes cuenta: </strong></a>
+        <br>
+        <a href="/register" class="link-signup"><button class="btn btn-primary" type="submit">Registrarse</button></a>
+</section>

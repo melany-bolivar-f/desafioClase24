@@ -1,0 +1,35 @@
+<main>
+    <header>
+        <h3 class="text-center">Lista de Productos: </h3>
+    </header>
+    {{#if user}}
+        {{#eq user.role 'admin'}}
+            <div class="welcome">
+                <p>Bienvenid@</p>
+            </div>
+        {{else}}
+            <div class="welcome">
+                <p>Bienvenid@ {{user.first_name}} {{user.last_name}} , enjoy shopping!</p>
+            </div>
+        {{/eq}}
+    {{/if}}
+    <div class="items-product">
+        <ul>
+            {{#each docs}}
+                <li>{{this.thumbnail}}</li>
+                <li>Titulo: {{this.title}}</li>
+                <a href="/products/details/{{this._id}}" class="btn btn-dark" style="margin: 5px">Detalle</a>
+                <hr>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="text-center" style="margin-top: 20px">
+        {{#if hasPrevPage}}
+            <a href="/products?pageNumber={{prevPage}}" class="btn btn-dark" style="margin-right: 10px">Anterior</a>
+        {{/if}}
+        <span class="page-number" style="margin-right: 10px">{{page}}</span>
+        {{#if hasNextPage}}
+            <a href="/products?pageNumber={{nextPage}}" class="btn btn-dark">Siguiente</a>
+        {{/if}}
+    </div>
+</main>
